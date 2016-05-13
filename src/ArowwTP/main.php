@@ -4,7 +4,7 @@ namespace ArowwTP
 
 use Pocketmine/plugin/pluginBase;
 
-Class Main/Main extends
+Class Main Main extends
 PluginBase{
 
 
