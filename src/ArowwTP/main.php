@@ -1,8 +1,8 @@
 <?php
 
-namespace ArowwTP
+namespace ArowwTP;
 
-use Pocketmine/plugin/pluginBase;
+use Pocketmine\plugin\pluginBase;
 
 Class Main extends
 PluginBase{
