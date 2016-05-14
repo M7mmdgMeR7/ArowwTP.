@@ -1,15 +1,16 @@
 <?php
 
-namespace ArowwTP;
+namespace ArowwTP 
 
-use Pocketmine\plugin\pluginBase;
+use Pocketmine\plugin\PluginBase
 
-Class Main extends
-PluginBase{
+class Main extends PluginBase{
 
-
-
-                       public function onShoot (\pocketmine\event\entity\EntityShootBowEvent $event)
+public function onEnable(){
+$this->getserver()->getLogger()->info("[ArowwTP]plugin has Been enabled");
+ }
+} 
+public function onShoot (\pocketmine\event\entity\EntityShootBowEvent $event)
 		{
 				$shooter = $event->getEntity();
 				if ($shooter instanceof Player) {
@@ -35,5 +36,4 @@ PluginBase{
 						}
 					}
 				}
-		}                            
-}
+		}
