@@ -1,63 +1,59 @@
 <?php
 
-namespace arrowtp;
+namespace ArowwTP;
 
-use pocketmine\event\entity\EntityShootBowEvent;
-use pocketmine\event\entity\ProjectileHitEvent;
-use pocketmine\event\inventory\InventoryPickupArrowEvent;
-use pocketmine\Server;
-use pocketmine\Player;
-use pocketmine\event\Listener;
-use pocketmine\utils\TextFormat;
-use pocketmine\plugin\PluginBase;
+use pocketmine\plugin\PluginBase
+use pocketmine\utils\TextFormat as Color;
+use pocketmine\Player
+use pocketmine\command\CommandSender
 
-class Main extends PluginBase implements Listener
-{
+class Mini extends PluginBase{
 
-	public $arrowSessions = [];
-    public function onEnable()
-    {
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getLogger()->info(TextFormat::GREEN . "ArrowTP has been enabled!");
-        $this->saveDefaultConfig();
+public function OnEnable(){ $this->getLogger()->info(Color:GREEN."ArowwTPplugin Enable");
 
-    }
+   }
 
-    public function onDisable()
-    {
-        $this->getLogger()->info(TextFormat::RED . "ArrowTP has been disabled.");
-    }
+public function OnDisable(){ $this->getLogger()->info(Color:RED."ArowwTPplugin Disable");
 
-    public function onArrowShoot(EntityShootBowEvent $ev)
-    {
-        $e = $ev->getProjectile();
-        $en = $ev->getEntity();
-        $lvlname = $e->getLevel()->getName();
-        if (in_array(strtolower($lvlname), $this->getConfig()->get("worlds"))){
-		    if ($en instanceof Player and $en->hasPermission("arrowtp.tp")) {
-                $this->arrowSessions[$e->getId()] = [$e->getId(), $en->getName()];
-            }
-        }
-	}
+  }
+public function onCommand(Command $sender Command $cmd, $label, array, $args)
+                switch ($cmd->getName())  {
+        case "ArowwHelp"
+      if($sender instanceof Player){
+                                             $sender->sendMessage(Color:BLUE."$name You Have 1 bow 10 Aroww"
+$sender->getinventory->additem(item: :get(261,0,1));
+       }
+$sender->getinventory->additem(item: :get(262,0,10));
 
-    public function onArrowHit(ProjectileHitEvent $ev){
-        $e = $ev->getEntity();
-        $id = $e->getId();
-        if(isset($this->arrowSessions[$id])){
-            $p = $this->getServer()->getPlayer($this->arrowSessions[$id][1]);
-            if($p !== null){
-                $p->teleport($e, $p->getYaw(), $p->getPitch());
-            }
 
-        }
-    }
 
-    public function onArrowPickup(InventoryPickupArrowEvent $ev)
-    {
-        if ($this->getConfig()->get("stopCrashes")) {
-            $ev->setCancelled(true);
-            $ev->getArrow()->kill();
-        }
-    }
+                                                                          public function onShoot (\pocketmine\event\entity\EntityShootBowEvent $event)
+		{
+				$shooter = $event->getEntity();
+				if ($shooter instanceof Player) {
+					$id = $shooter->getID();
+					$this->launch[$id] = (bool) true;
+				}
+		}
+		
+		function onHit (\pocketmine\event\entity\ProjectileHitEvent $event)
+		{
+				$entity = $event->getEntity();
+				$level = $entity->getLevel();
+				if ($entity instanceof Arrow) {
+					$shooter = $entity->shootingEntity;
+					$pos = $entity->getPosition();
+					if ($shooter instanceof Player) {
+						$id = $shooter->getID();
+						$shoot = $this->launch[$id];
+						if ($pos instanceof Position and isset($shoot)) {
+							$level->removeEntity($entity);
+							$event->teleport($pos);
+							unset($this->launch[$id]);
+						}
+					}
+				}
+		}
 
-}
+        
+
