@@ -7,7 +7,7 @@ use pocketmine\utils\TextFormat as Color;
 use pocketmine\Player
 use pocketmine\command\CommandSender
 
-class Mini extends PluginBase{
+class Main extends PluginBase{
 
 public function OnEnable(){ $this->getLogger()->info(Color:GREEN."ArowwTPplugin Enable");
 
