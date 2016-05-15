@@ -3,4 +3,4 @@ Name: ArowwTP
 Author: xd_plugin_xd
 Main: ArowwTP/Main
 version: 1.0
-api: [2.0.0]
+api: [0.13.1+]
