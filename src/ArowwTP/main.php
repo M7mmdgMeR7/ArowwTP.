@@ -3,8 +3,6 @@
 namespace ArowwTP;
 
 use pocketmine\plugin\PluginBase
-use pocketmine\utils\TextFormat as Color;
-use pocketmine\Player
 use pocketmine\command\CommandSender
 
 class Main extends PluginBase{
@@ -20,10 +18,10 @@ public function onCommand(Command $sender Command $cmd, $label, array, $args)
                 switch ($cmd->getName())  {
         case "ArowwHelp"
       if($sender instanceof Player){
-                                             $sender->sendMessage(Color:BLUE."$name You Have 1 bow 10 Aroww"
-$sender->getinventory->additem(item: :get(261,0,1));
+                                             
+
        }
-$sender->getinventory->additem(item: :get(262,0,10));
+                                                      
 
 
 
